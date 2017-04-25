@@ -1,0 +1,820 @@
+/**
+ *
+ * Fonts
+ *
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+
+/*=============================================
+=            Global            =
+=============================================*/
+
+html,
+html body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+}
+
+body {
+    font-size: 14px;
+    font-family: 'Noto Sans';
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Roboto';
+    font-weight: 100;
+    margin: 4rem 0px;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+input[type='submit']:hover,
+input[type='button']:hover,
+a.button:hover,
+button:hover {
+    cursor: pointer;
+    background-color: #FF8A80;
+}
+
+input[type='submit'],
+input[type='button'],
+a.button,
+button {
+    background: #FF5252;
+    border: none;
+    padding: 20px 30px;
+    font-size: 1rem;
+    min-width: 100px;
+    margin: 0px 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border-radius: 2px;
+    color: white;
+    /* height: 36px; */
+    font-weight: 500;
+    text-transform: uppercase;
+    /* letter-spacing: 0; */
+    /* will-change: box-shadow; */
+    /* line-height: 36px; */
+    vertical-align: middle;
+    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+input[type='password']:focus,
+input[type='text']:focus,
+input[type='email']:focus,
+textarea:focus {
+    outline-offset: -2px;
+    color: #546E7A;
+    outline: none;
+    border-bottom: 1px solid #ff4081;
+    padding: 12px 2px;
+    font-size: 1rem;
+}
+
+select,
+input[type='text'],
+input[type='password'],
+input[type='email'],
+textarea {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    display: block;
+    font-size: .9rem;
+    font-family: "Helvetica", "Arial", sans-serif;
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    background: 0 0;
+    text-align: left;
+    margin: 15px 5px;
+    color: #757575;
+    transition: all .3s ease;
+}
+
+input[type="checkbox"] {}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 20px 0px;
+}
+
+li {
+    margin: 10px 0px;
+}
+
+li::before {
+    font-family: 'Material Icons';
+    content: '\-';
+    margin-right: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+footer {
+    background-color: #3c4f58;
+    padding: 50px;
+    margin-top: 5rem;
+}
+
+
+/*=====  End of Global  ======*/
+
+
+/*=============================================
+=            Global classes            =
+=============================================*/
+
+
+/**
+ *
+ * Buttons
+ *
+ */
+
+input[type='submit'].center,
+input[type='button'].center,
+a.button.center,
+button.center {
+    margin: 30px auto;
+    width: 120px;
+    display: block;
+}
+
+
+/**
+ *
+ * Div, section, p, span
+ *
+ */
+
+.center,
+div.center,
+p.center,
+span.center {
+    text-align: center;
+}
+
+li.done::before {
+    color: #4DB6AC;
+    content: '\E876';
+    font-family: 'Material Icons';
+    vertical-align: middle;
+}
+
+.good {
+    color: #4DB6AC;
+}
+
+.bad {
+    color: #EF9A9A;
+}
+
+.big {
+    font-size: 2.5rem;
+}
+
+li.big {
+    font-size: 1.1rem;
+}
+
+i.big {
+    font-size: 6rem;
+}
+
+p.big {
+    font-size: 1.5rem;
+}
+
+div.forward {
+    padding: 30px 0px;
+    background-color: #f7f8fa;
+}
+
+.huge {
+    font-size: 2rem;
+}
+
+.right {
+    text-align: right;
+}
+
+span.badge {
+    color: #454545;
+    background-color: #dedede;
+}
+
+span.state {
+    margin-left: 20px;
+    font-size: 1.2rem;
+}
+
+div.grid-3,
+div.grid-4 {
+    width: 100%;
+}
+
+div.grid-3>div,
+div.grid-4>div {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+div.grid-3>div {
+    width: 33%;
+}
+
+footer div.logo {
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+footer div.logo img {
+    /* vertical-align: middle; */
+    width: 200px;
+}
+
+footer p.slogan {
+    font-size: 1.2rem;
+    margin: 0px;
+    color: #eee;
+    font-weight: 700;
+}
+
+footer a {
+    display: block;
+    color: white;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+footer a i {
+    margin: 0px 5px;
+    color: #FF8A80;
+}
+
+i {
+    vertical-align: middle;
+}
+
+
+/**
+ *
+ * a
+ *
+ */
+
+nav#menu a.home::before {
+    font-family: 'Material Icons';
+    content: '\E88A';
+    vertical-align: middle;
+}
+
+nav#menu a.contact::before {
+    font-family: 'Material Icons';
+    content: '\E158';
+    vertical-align: middle;
+}
+
+nav#menu a.account {
+    color: gray;
+    background-color: white;
+}
+
+nav#menu a.account::before {
+    font-family: 'Material Icons';
+    content: '\E7FD';
+    vertical-align: middle;
+    font-size: 1.5rem;
+    margin-right: 5px;
+    color: gray;
+}
+
+
+/**
+ *
+ * i
+ *
+ */
+
+i.huge {
+    font-size: 15rem;
+}
+
+img.medium {
+    width: 4rem;
+}
+
+.margin {
+    margin: 1rem;
+}
+
+div.background {
+    background: url('https://static.pexels.com/photos/194511/pexels-photo-194511.jpeg');
+    background-position: center;
+    background-size: 100%;
+    color: white;
+}
+
+div.background>*:first-of-type {
+    margin-top: 0px;
+}
+
+div.background>*:last-of-type {
+    margin-bottom: 0px;
+}
+
+div.background>div.opacity {
+    padding: 50px 0px;
+    background-color: rgba(60, 79, 88, .7);
+}
+
+
+/*=====  End of Global classes  ======*/
+
+
+/*=============================================
+=            Header            =
+=============================================*/
+
+header {
+    /* background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
+    /* background-image: url('/images/background.jpeg'); */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100%; */
+    background-color: #3f51b5;
+    color: white;
+    padding-top: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+header h1.title {
+    display: inline-block;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 100;
+    margin: 0px 10px;
+}
+
+header h1.title a {
+    color: white;
+}
+
+header p.slogan {
+    display: inline-block;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+
+/*=============================================
+=            Menu            =
+=============================================*/
+
+nav#menu {
+    text-align: center;
+    background-color: #eee;
+    margin-top: 30px;
+}
+
+nav#menu form {
+    display: inline-block;
+}
+
+nav#menu a,
+nav#menu button,
+nav#menu form input[type='submit'],
+nav#menu form input[type='button'] {
+    padding: 25px;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin: 0px 20px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #454545;
+}
+
+nav#menu a:hover,
+nav#menu button:hover,
+nav#menu form input[type='submit']:hover,
+nav#menu form input[type='button']:hover {
+    color: gray;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+nav#menu a.selected,
+nav#menu button.selected,
+nav#menu form input[type='submit'].selected,
+nav#menu form input[type='button'].selected {
+    border-bottom: 4px solid #FF5252;
+    padding-bottom: 21px;
+}
+
+
+/*=====  End of Menu  ======*/
+
+
+/*=============================================
+=            Container            =
+=============================================*/
+
+div.container-table,
+div.container {
+    margin: auto;
+    width: 80%;
+}
+
+div.container-smaller {
+    margin: auto;
+    width: 40%;
+}
+
+.disapproved::before {
+    font-family: 'Material Icons';
+    content: '\E5CD';
+    vertical-align: middle;
+    color: #EF9A9A;
+}
+
+div.container {
+    width: 80%;
+}
+
+div.container-table {
+    width: 60%;
+}
+
+div.container>div:first-of-type {
+    margin-right: 1%;
+}
+
+div.container>div:last-of-type {
+    margin-left: 1%;
+}
+
+div.container-table>div,
+div.container>div {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+div.container>div>p {
+    margin-bottom: 30px;
+}
+
+div.container-table>div:first-of-type {
+    width: 100%;
+}
+
+div.container-table>div:last-of-type {
+    width: 100%;
+}
+
+.middle {
+    vertical-align: middle;
+}
+
+.inline {
+    display: inline-block;
+}
+
+
+/*=====  End of Container  ======*/
+
+
+/*=============================================
+=            Title            =
+=============================================*/
+
+h2.subtitle {
+    margin: 40px 0px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+p.explanation {
+    text-align: center;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+
+/*=====  End of Title  ======*/
+
+div.partners {
+    color: #454545;
+}
+
+div.partners img {
+    width: 100px;
+    margin: 50px;
+}
+
+div.quotation {
+    display: flex;
+    font-size: 3rem;
+    /* font-style: italic; */
+    font-weight: bold;
+    color: #454545;
+    align-items: center;
+    justify-content: center;
+}
+
+div.quotation ħ2 {
+    font-weight: 700;
+}
+
+
+/*=====  End of Page  ======*/
+
+
+/*=============================================
+=            TABLE            =
+=============================================*/
+
+table,
+div.table {
+    margin: 20px 0px;
+    display: table;
+    padding: 0px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    width: 100%;
+}
+
+table.tr,
+form.tr,
+div.tr {
+    padding: 10px;
+    display: table-row;
+}
+
+table.tr:hover,
+form.tr:hover,
+div.tr:hover {
+    padding: 20px;
+    background: #eee;
+}
+
+thead,
+span.th {
+    text-align: center;
+    font-size: .9rem;
+    vertical-align: top;
+    /* text-overflow: ellipsis; */
+    font-weight: 700;
+    /* line-height: 24px; */
+    /* letter-spacing: 0; */
+    /* height: 48px; */
+    color: rgba(0, 0, 0, .54);
+    padding-bottom: 8px;
+}
+
+span.th,
+span.td {
+    border-top: 1px solid rgba(0, 0, 0, .12);
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    display: table-cell;
+    color: #757575;
+    padding: 20px 0px;
+}
+
+span.td.actions>button::before,
+span.td.actions>input[type='button']::before,
+span.td.actions>a::before {
+    color: white;
+}
+
+span.td input[type='text']:focus {
+    color: #454545;
+    /* outline-offset: 0px; */
+    font-size: .9rem;
+    border: none;
+    /* outline-offset: initial; */
+    /* outline: none; */
+    padding: 10px 0px;
+}
+
+span.td input[type='text'] {
+    color: #757575;
+    border: none;
+}
+
+
+/*=====  End of TABLE  ======*/
+
+
+/*=============================================
+=            Button            =
+=============================================*/
+
+.approved::before {
+    font-family: 'Material Icons';
+    content: '\E876';
+    vertical-align: middle;
+    color: #4DB6AC;
+}
+
+.disapproved::before {
+    font-family: 'Material Icons';
+    content: '\E5CD';
+    vertical-align: middle;
+    color: #EF9A9A;
+}
+
+
+/*=====  End of Button  ======*/
+
+
+/*=============================================
+=            Menu            =
+=============================================*/
+
+input#nav {
+    position: initial;
+    clip: rect(0, 0, 0, 0);
+    float: right;
+    width: 0px;
+}
+
+label[for="nav"] {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 150;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+}
+
+
+/*=====  End of Menu  ======*/
+
+div.message {
+    text-align: center;
+    padding: 10px 0px;
+    margin: 40px auto;
+    color: white;
+    width: 40%;
+}
+
+div.message.success {
+    background-color: #4DB6AC;
+}
+
+div.message.error {
+    background-color: #EF9A9A;
+}
+
+
+/*=============================================
+=            Media query            =
+=============================================*/
+
+@media screen and (max-width: 900px) {
+    .huge {
+        font-size: 2.5rem;
+    }
+    .big {
+        font-size: 2rem;
+        margin-bottom: 0px;
+    }
+    div.grid-3>div,
+    div.grid-4>div {
+        width: 80%;
+        margin: 5% 10%;
+    }
+    div.container>div {
+        width: 100%;
+    }
+    nav#menu {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: all .1s;
+    }
+    input#nav:checked~nav#menu {
+        opacity: 1;
+        /* align-items: center; */
+        position: fixed;
+        z-index: 100;
+        top: 0px;
+        left: 0px;
+        background-color: #FF5252;
+        /* color: white; */
+        height: 100vh;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+    }
+    input#nav:checked~nav#menu a::before {
+        color: white;
+    }
+    input#nav:checked~nav#menu a.account,
+    input#nav:checked~nav#menu a {
+        color: white;
+        background-color: #FF5252;
+        display: block;
+        /* width: 100%; */
+        margin: auto;
+    }
+    label[for="nav"] {
+        display: initial;
+    }
+    label[for="nav"]::before {
+        content: '\E164';
+        font-family: 'Material Icons';
+        width: 3rem;
+        height: 3rem;
+        font-size: 3rem;
+        color: white;
+    }
+    input#nav:checked~label[for="nav"] {
+        position: fixed;
+    }
+    input#nav:checked~label[for="nav"]::before {
+        content: '\E14C';
+        /*color: black;*/
+    }
+    div.container-smaller {
+        margin: auto;
+        width: 70%;
+    }
+    input[type='submit'],
+    input[type='button'],
+    a.button,
+    button {
+        padding: 15px 25px;
+        margin: 15px 0px;
+    }
+    table,
+    div.table {
+        width: 90%;
+        margin: 5%;
+    }
+    div.container-table {
+        text-align: center;
+        width: 100%;
+    }
+    div.container-table>div:first-of-type {
+        width: 80%;
+        margin: auto;
+    }
+    div.container-table>div:last-of-type {
+        /* width: 90%; */
+    }
+    span.th,
+    span.td {
+        padding: 5px;
+    }
+    span.td input[type='text'] {
+        margin: 0px;
+    }
+    span.state {
+        margin: 0px 5px;
+    }
+}
+
+
+/*=====  End of Media query  ======*/

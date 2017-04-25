@@ -1,0 +1,37 @@
+extends common/layout
+
+block content
+
+    h2.subtitle Authentification 
+    p.explanation Authentifiez-vous pour pouvoir gérer le contenu et la base de données
+
+        if user
+            div.center
+                p Connecté en tant que : 
+                    if user.administrator
+                        b administrateur
+                    else if user.contributor
+                        b contributeur
+
+                form(action='/auth' method='POST')
+                    input(type='hidden' name='disconnect' value='disconnect')
+                    input(type='submit' value='Déconnexion')
+        else
+
+            div.container
+
+                div
+                    h3 Identification
+                        form(action='/auth' method='POST')
+                            input(type='text' name='email' placeholder='Adresse e-mail')
+                            input(type='password' name='password' placeholder='Mot de passe')
+                            input(type='submit' value='Valider').center
+
+                div
+                    h3 Enregistrement
+                        form(action='/register' method='POST')
+                            input(type='text' name='name' placeholder='Nom, prénom ou pseudo')
+                            input(type='text' name='description' placeholder='Description')
+                            input(type='email' name='email' placeholder='Adresse e-mail')
+                            input(type='password' name='password' placeholder='Mot de passe')
+                            input(type='submit' value='Valider').center

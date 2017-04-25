@@ -1,0 +1,62 @@
+extends common/layout
+
+block content
+    
+    case title
+        when 'startup'
+            h2.subtitle Démarrage (#{content_counted.countApproved})
+            p.explanation Clé de démarrage inutiles au fonctionnement de l'ordinateur
+        when 'registry' 
+            h2.subtitle Registre (#{content_counted.countApproved})
+            p.explanation Optimisation dans le registre pour optimiser la rapidité de l'ordinateur
+        when 'service'
+            h2.subtitle Services (#{content_counted.countApproved})
+            p.explanation Services à désactiver / mettre en manuel car désactivables
+        when 'software'
+            h2.subtitle Logiciels (#{content_counted.countApproved})
+            p.explanation Logiciels inutiles pouvant être supprimés
+
+    div.container-table
+        div
+            form(method='POST' action=url)
+                input(type='text' name='name' required placeholder='Nom')
+                input(type='text' name='description' required placeholder='Description')
+                if user
+                    if user.administrator
+                        input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
+                input(type='submit' value='Créer').center
+
+        div
+            div.table
+                span.th
+                span.th Nom
+                span.th Description
+                span.th Date d'ajout
+                if user
+                    if user.administrator
+                        span.th Actions
+
+                each c in content
+                    //- - var classes = [ 'tr', c.deleted ? 'deleted' : c.approved ? 'approved' : 'disapproved' ];
+                    form(
+                        method='post' 
+                        action=url + '/api/web'
+                        class='tr'
+                    )
+                        input(type='hidden' name='id' value=c.id readonly)
+                        span.td
+                            span.state(class=c.approved ? 'approved' : 'disapproved')
+                        span.td
+                            input(type='text' name='name' value=c.name)
+                        span.td
+                            input(type='text' name='description' value=c.description)
+                        span.td.center= c.dateAdded
+                        span.td.actions.center
+                            if user
+                                if user.administrator
+                                    if c.approved
+                                        input(type='submit' value='Modifier')
+                                        a(href=url + '/api/web/0/' + c.id).button.disapproved
+                                    else 
+                                        a(href=url + '/api/web/1/' + c.id).button.approved
+

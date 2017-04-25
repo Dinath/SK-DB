@@ -1,0 +1,7 @@
+extends common/layout
+
+block content
+  h1= error.status 
+    | - #{message}
+    
+  pre #{error.stack}

@@ -1,0 +1,24 @@
+extends common/layout
+
+block content
+
+    h2.subtitle Contactez-nous ! 
+    p.explanation Demandez-nous des renseignements
+
+    - var classes = ['message', messageType]
+    div(class=classes)
+
+        p= message
+
+    div.container-smaller.center
+
+        form(method='POST' action='/email')
+            input(type='text' name='name' placeholder='Votre nom' required)
+            input(type='email' name='email' placeholder='Votre adresse e-mail' required)
+            select(name='subject')
+                option Presse
+                option Contacter la communauté
+                option Support
+            textarea(name='message' rows='10' placeholder='Votre message')
+            div.center
+                input(type='submit' value='Envoyer')

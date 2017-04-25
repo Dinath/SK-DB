@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Slowin' Killer pour Windows ®
+    meta(charset=utf-8)
+    meta(description="Slowin Killer est un logiciel communautiare gratuit pour optimiser Windows")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    
+  body.site-wrap
+
+    header
+      h1.title
+        a(href='/') Slowin' Killer
+      p.slogan Outil d'optimisation communautaire pour Windows ®
+
+      input(type="checkbox")#nav.nav.close
+      label(for="nav")
+
+      nav#menu
+        a(href='/').home
+        a(href='/contact').contact
+        a(href='/startup' class=url == 'startup' ? 'selected' : '') Démarrage
+        a(href='/software' class=url == 'software' ? 'selected' : '') Logiciels
+        a(href='/registry' class=url == 'registry' ? 'selected' : '') Registre
+        a(href='/service' class=url == 'service' ? 'selected' : '') Services
+        a(href='/auth' class=url == 'auth' ? 'selected' : '').account
+          if user
+            | #{user.name}
+
+    block content
+
+    include footer
