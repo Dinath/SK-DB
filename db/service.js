@@ -1,9 +1,11 @@
-var db = require('./index');
+const __db = require('./index');
 
-var sequelize = db.sequelize;
-var Sequelize = db.Sequelize;
+const sequelize = __db.sequelize;
+const Sequelize = __db.Sequelize;
 
-var table = sequelize.define('service', {
+const windows = require('./relations/windows');
+
+const table = sequelize.define('service', {
     name: {
         type: Sequelize.STRING
     },
@@ -13,15 +15,25 @@ var table = sequelize.define('service', {
     approved: {
         type: Sequelize.BOOLEAN
     },
-    dateAdded: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+    pending: {
+        type: Sequelize.BOOLEAN
     }
+}, { define: { freezeTableName: true, timestamps: false } });
+
+table.hasMany(windows.table);
+
+table.sync().then(function() {
+    windows.table.sync().then(function() {
+        windows.table.count().then(function(count) {
+            if (count === 0) {
+                windows.table.create({ name: 'Windows Vista / 7 / 8' }).then(function() {});
+                windows.table.create({ name: 'Windows 10' }).then(function() {});
+            }
+        });
+    });
 });
 
-sequelize.sync().then(function() {});
-
-var db = {
+const db = {
     table: table
 };
 

@@ -1,0 +1,5 @@
+if c.approved
+    input(type='submit' value='Modifier')
+    a(href='/com/' + url + '/api/web/0/' + c.id).button.disapproved
+else 
+    a(href='/com/' + url + '/api/web/1/' + c.id).button.approved

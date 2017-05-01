@@ -1,0 +1,37 @@
+block append content
+
+    div.container-table
+    
+        div
+            form(method='POST' action='/software/api/web')
+                input(type='text' name='name' required placeholder='Nom')
+                input(type='text' name='description' required placeholder='Description')
+                if user && user.administrator
+                    input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
+                input(type='submit' value='Créer').center
+
+        div
+            div.table
+                span.th
+                span.th Nom
+                span.th Description
+                if user && user.administrator
+                    span.th Actions
+
+                each c in content
+                    form(
+                        method='post' 
+                        action='/software/api/web'
+                        class='tr'
+                    )
+                        input(type='hidden' name='id' value=c.id readonly)
+                        span.td
+                            span.state(class=c.approved ? 'approved' : 'disapproved')
+                        span.td
+                            input(type='text' name='name' value=c.name)
+                        span.td
+                            input(type='text' name='description' value=c.description)
+                        span.td.actions.center
+                            if user && user.administrator
+                                include ../utils/actions
+

@@ -1,9 +1,10 @@
-var db = require('./index');
+const __db = require('./index');
+// const utils = require('../ctrl/utils');
 
-var sequelize = db.sequelize;
-var Sequelize = db.Sequelize;
+const sequelize = __db.sequelize;
+const Sequelize = __db.Sequelize;
 
-var table = sequelize.define('user', {
+const table = sequelize.define('user', {
     name: {
         type: Sequelize.STRING
     },
@@ -27,14 +28,11 @@ var table = sequelize.define('user', {
     administrator: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
-    },
-    dateAdded: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
     }
-});
+}, { define: { freezeTableName: true, timestamps: false } });
 
-sequelize.sync({ force: true }).then(function() {
+table.sync({ force: true }).then(function() {
+
     table.create({
         name: 'Dinath',
         description: 'Développeur de Slowin\' Killer',
@@ -46,7 +44,7 @@ sequelize.sync({ force: true }).then(function() {
     });
 });
 
-var db = {
+const db = {
     table: table
 };
 

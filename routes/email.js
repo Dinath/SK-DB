@@ -1,21 +1,25 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const utils = require('../ctrl/utils');
+const auth = new utils().auth('smtp');
+
 const nodemailer = require('nodemailer');
 
 const config = {
     host: 'plesk.cubis-helios.com',
     port: 465,
-    secure: true, // upgrade later with STARTTLS
+    secure: true,
     auth: {
-        user: 'a.soyer@cubis-helios.com',
-        pass: 'pass'
+        user: auth.user,
+        pass: auth.pass
     },
     tls: {
         rejectUnauthorized: false
     }
 };
 
-let transporter = nodemailer.createTransport(config);
+const transporter = nodemailer.createTransport(config);
 
 router.post('/', function(req, res) {
 
@@ -36,7 +40,7 @@ router.post('/', function(req, res) {
             console.log(error);
             render(res, 'Votre message n\'a pas été envoyé', false);
         }
-        console.log('Message %s sent: %s', info.messageId, info.response);
+        // console.log('Message %s sent: %s', info.messageId, info.response);
     });
 
     render(res, 'Votre message a bien été envoyé');

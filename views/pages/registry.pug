@@ -1,0 +1,76 @@
+block append content
+
+    div.container-table
+    
+        div
+            form(method='POST' action='/registry/api/web')
+                input(type='text' name='reg_path' required placeholder='Chemin de la clé de registre')
+                input(type='text' name='reg_name' required placeholder='Nom de la clé de registre')
+                input(type='text' name='reg_value' required placeholder='Valeur de la clé de registre')
+                select(name='reg_type')
+                    option DWORD
+                    option QWORD
+                    option REG_BINARY
+                    option REG_EXPAND_SZ
+                    option REG_MULTI_DZ
+                    option REG_SZ
+                if user && user.administrator
+                    input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
+                div.center
+                    input(type='submit' value='Créer')
+
+        div
+            div.table
+                span.th
+                span.th Chemin
+                span.th Nom
+                span.th Valeur
+                span.th Type
+                span.th Versions
+                if user && user.administrator
+                    span.th Actions
+
+                each c in content
+                    form(
+                        method='post' 
+                        action='/registry/api/web'
+                        class='tr'
+                    )
+                        input(type='hidden' name='id' value=c.id readonly)
+                        span.td
+                            span.state(class=c.approved ? 'approved' : 'disapproved')
+                        span.td
+                            if user && user.contributor
+                                input(type='text' name='reg_path' value=c.reg_path)
+                            else
+                                input(type='text' value=c.reg_path disabled)
+                        span.td
+                            if user && user.contributor
+                                input(type='text' name='reg_name' value=c.reg_name)
+                            else
+                                input(type='text' value=c.reg_name disabled)
+
+                        span.td
+                            if user && user.contributor
+                                input(type='text' name='reg_value' value=c.reg_value)
+                            else
+                                input(type='text' value=c.reg_value disabled)
+
+                        span.td
+                            if user && user.contributor
+                                select(name='reg_type' value=c.reg_type)
+                                    option DWORD
+                                    option QWORD
+                                    option REG_BINARY
+                                    option REG_EXPAND_SZ
+                                    option REG_MULTI_DZ
+                                    option REG_SZ
+                            else 
+                                select(value=c.reg_type disabled)
+                                    option= c.reg_type
+
+
+                        if user && user.administrator
+                            span.td.actions.center
+                                include ../utils/actions
+

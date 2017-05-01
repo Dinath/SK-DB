@@ -1,9 +1,10 @@
-var db = require('./index');
+const __db = require('./index');
+// const utils = require('../ctrl/utils');
 
-var sequelize = db.sequelize;
-var Sequelize = db.Sequelize;
+const sequelize = __db.sequelize;
+const Sequelize = __db.Sequelize;
 
-var table = sequelize.define('software', {
+const table = sequelize.define('software', {
     name: {
         type: Sequelize.STRING
     },
@@ -13,15 +14,14 @@ var table = sequelize.define('software', {
     approved: {
         type: Sequelize.BOOLEAN
     },
-    dateAdded: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+    pending: {
+        type: Sequelize.BOOLEAN
     }
-});
+}, { define: { freezeTableName: true, timestamps: false } });
 
 sequelize.sync().then(function() {});
 
-var db = {
+const db = {
     table: table
 };
 

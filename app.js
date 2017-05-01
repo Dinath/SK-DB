@@ -1,28 +1,37 @@
 /**
  * Libraries
  */
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var helmet = require('helmet');
-var session = require('express-session');
-var auth = require('http-auth');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const session = require('express-session');
+const auth = require('http-auth');
+const compression = require('compression');
+
 
 /**
  * Databases
  */
-var db = require('./db/index');
+const db = require('./db/index');
 
 /**
  * Routes
  */
 
-var index = require('./routes/index');
-var routes = require('./routes/pages');
-var route_auth = require('./routes/auth');
+const index = require('./routes/index');
+
+const route_service = require('./routes/pages/service');
+// const route_software = require('./routes/pages/software');
+// const route_startup = require('./routes/pages/startup');
+const route_pages = require('./routes/pages');
+const route_registry = require('./routes/pages/registry');
+const routes_common = require('./routes/utils/common');
+
+const route_auth = require('./routes/auth');
 const route_contact = require('./routes/contact');
 const route_sk = require('./routes/sk');
 const route_email = require('./routes/email');
@@ -32,6 +41,7 @@ const route_email = require('./routes/email');
  * Express
  */
 var app = express();
+app.use(compression());
 
 // PUG : view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,13 +51,14 @@ app.set('view engine', 'pug');
  * Configuration
  */
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 // app.use(bodyParser);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -55,12 +66,7 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-var digest = auth.digest({
-    realm: "Slowin-Killer",
-    file: __dirname + "/ctrl/secure.htdigest"
-});
-
-var basic = auth.basic({
+const basic = auth.basic({
     file: __dirname + "/ctrl/secure.htpasswd"
 })
 
@@ -69,10 +75,13 @@ var basic = auth.basic({
  */
 
 app.use('/', index);
-app.use('/service', routes);
-app.use('/software', routes);
-app.use('/startup', routes);
-app.use('/registry', routes);
+app.use('/software', route_pages);
+app.use('/startup', route_pages);
+
+app.use('/service', route_service);
+app.use('/registry', route_registry);
+
+app.use('/com', routes_common);
 app.use('/auth', route_auth);
 app.use('/contact', route_contact);
 app.use('/sk', auth.connect(basic), route_sk);

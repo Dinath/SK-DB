@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    
+    case title
+        when 'startup'
+            h2.subtitle Démarrage (#{content_counted})
+            p.explanation Clé de démarrage inutiles au fonctionnement de l'ordinateur
+        when 'registry' 
+            h2.subtitle Registre (#{content_counted})
+            p.explanation Optimisation dans le registre pour optimiser la rapidité de l'ordinateur
+        when 'service'
+            h2.subtitle Services (#{content_counted})
+            p.explanation Services à désactiver / mettre en manuel car désactivables
+        when 'software'
+            h2.subtitle Logiciels (#{content_counted})
+            p.explanation Logiciels inutiles pouvant être supprimés

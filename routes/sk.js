@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const authentification = require('../ctrl/authentification');
 const utils__ = require('../ctrl/utils');
 const utils = new utils__();
 

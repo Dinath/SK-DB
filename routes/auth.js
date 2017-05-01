@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var authentification = require('../ctrl/authentification');
-var user = require('../db/user');
+const express = require('express');
+const router = express.Router();
+const user = require('../db/user');
 
 
 router.get('/', function(req, res) {

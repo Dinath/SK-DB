@@ -1,20 +1,21 @@
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
+const utils__ = require('../ctrl/utils');
+const utils = new utils__();
 
-var sequelize = new Sequelize('mysql://root:pass@localhost:3306/skdb');
+const db_auth = utils.auth(utils.database_password());
+
+const sequelize = new Sequelize('mysql://' + db_auth.user + ':' + db_auth.pass + '@localhost:3306/skdb', {
+    define: { freezeTableName: true }
+});
 
 sequelize.authenticate()
-    .then(function(err) {
-        console.log('Connection has been established successfully.');
-    })
+    .then()
     .catch(function(err) {
         console.log('Unable to connect to the database:', err);
         throw err;
     });
 
-// sequelize.sync().then(function() {});
-// sequelize.sync({ force: true }).then(function() {});
-
-var db = {
+const db = {
     sequelize: sequelize,
     Sequelize: Sequelize
 };

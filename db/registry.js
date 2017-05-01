@@ -1,13 +1,26 @@
-var db = require('./index');
+const __db = require('./index');
+// const utils = require('../ctrl/utils');
 
-var sequelize = db.sequelize;
-var Sequelize = db.Sequelize;
+const sequelize = __db.sequelize;
+const Sequelize = __db.Sequelize;
 
-var table = sequelize.define('registry', {
+const table = sequelize.define('registry', {
     name: {
         type: Sequelize.STRING
     },
     description: {
+        type: Sequelize.STRING
+    },
+    reg_path: {
+        type: Sequelize.STRING
+    },
+    reg_name: {
+        type: Sequelize.STRING
+    },
+    reg_value: {
+        type: Sequelize.STRING
+    },
+    reg_type: {
         type: Sequelize.STRING
     },
     approved: {
@@ -15,16 +28,12 @@ var table = sequelize.define('registry', {
     },
     pending: {
         type: Sequelize.BOOLEAN
-    },
-    dateAdded: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
     }
-});
+}, { define: { freezeTableName: true, timestamps: false } });
 
-sequelize.sync().then(function() {});
+table.sync();
 
-var db = {
+const db = {
     table: table
 };
 
