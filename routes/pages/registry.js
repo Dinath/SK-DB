@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const sequelize = require('../../db/index').sequelize;
-const db = require('../../db/registry');
+const db = require('../../db/index').registry;
 
 const utils__ = require('../../ctrl/utils');
 const crud__ = require('../utils/crud');
@@ -12,7 +11,7 @@ const crud = new crud__(db);
 
 router.get('/', function(req, res) {
 
-    db.table.findAll({
+    db.findAll({
         raw: true,
         order: [
             ['id', 'DESC']
@@ -28,9 +27,9 @@ router.post('/api/web', function(req, res) {
     const url = utils.get_url(req.originalUrl);
 
     if (req.body.id) {
-        crud.update(req, res, url);
+        crud.update(res, req, url);
     } else if (req.body.reg_path && req.body.reg_name && req.body.reg_value && req.body.reg_type) {
-        crud.create(req, res, url);
+        crud.create(res, req, url);
     } else {
         res.redirect('/' + url);
     }

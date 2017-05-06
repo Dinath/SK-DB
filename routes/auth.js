@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const user = require('../db/user');
+const user = require('../db/index').user;
 
 
 router.get('/', function(req, res) {
@@ -26,7 +26,7 @@ router.post('/', function(req, res) {
      * Check for credentials
      */
 
-    user.table.findOne({ raw: true }, {
+    user.findOne({ raw: true }, {
         email: req.body.email,
         password: req.body.password
     }).then(function(user) {

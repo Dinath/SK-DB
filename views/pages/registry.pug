@@ -14,8 +14,6 @@ block append content
                     option REG_EXPAND_SZ
                     option REG_MULTI_DZ
                     option REG_SZ
-                if user && user.administrator
-                    input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
                 div.center
                     input(type='submit' value='Créer')
 

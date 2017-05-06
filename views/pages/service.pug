@@ -9,13 +9,7 @@ block append content
                 if user && user.administrator
                     input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
                 div.center
-                    if windows
-                        each w in windows
-                            span.checkbox
-                                label(for='windows_' + w.id).checkbox
-                                    input(id='windows_' + w.id name='windows_' + w.id type="checkbox").checkbox
-                                    | #{w.name}
-                input(type='submit' value='Créer').center
+                    input(type='submit' value='Créer').center
 
         div
             div.table
@@ -39,14 +33,7 @@ block append content
                             input(type='text' name='name' value=c.name)
                         span.td
                             input(type='text' name='description' value=c.description)
-                        span.td
-                            if c.windows
-                                each c_w in c.windows
-                                    span.checkbox
-                                        label(for='windows_' + c_w.id).checkbox
-                                            input(id='windows_' + c_w.id name='windows_' + c_w.id type="checkbox").checkbox
-                                            | #{c_w.name}
-                        
+                   
                         span.td.actions.center
                             if user && user.administrator
                                 include ../utils/actions

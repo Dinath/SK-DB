@@ -20,19 +20,19 @@ Utils.prototype.get_db = function(url) {
 
     // service
     if (url === 'service') {
-        return require('../db/service.js');
+        return require('../db/index').service;
     }
     // software
     else if (url === 'software') {
-        return require('../db/software.js');
+        return require('../db/index').software;
     }
     // registry
     else if (url === 'registry') {
-        return require('../db/registry.js');
+        return require('../db/index').registry;
     }
     // startup
     else if (url === 'startup') {
-        return require('../db/startup.js');
+        return require('../db/index').startup;
     }
 };
 

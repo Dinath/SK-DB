@@ -9,7 +9,7 @@ router.get('/:page/api/web/:approve/:id', function(req, res) {
     const url = req.params.page;
     const db = utils.get_db(url);
 
-    db.table.update({
+    db.update({
         approved: req.params.approve
     }, {
         where: { id: req.params.id }

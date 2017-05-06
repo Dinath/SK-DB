@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const db_windows = require('../db/index').windows;
 const sequelize = require('../db/index').sequelize;
-const db = require('../db/registry');
-const db_windows = require('../db/relations/windows').table;
 
 const utils__ = require('../ctrl/utils');
 const crud__ = require('./utils/crud');
@@ -16,12 +15,18 @@ router.get('/', function(req, res) {
     const db = utils.get_db(url);
     const crud = new crud__(db);
 
-    db.table.findAll({
+    // const columns = sequelize.query(
+    //     'SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = "skdb" AND table_name = "' + db.name + '"', { raw: true }
+    // ).then(function(columns) {
+    //     console.log(columns);
+    // });
+
+
+    db.findAll({
         raw: true,
         order: [
             ['id', 'DESC']
-        ],
-        include: [db_windows]
+        ]
     }).then(function(content) {
         crud.count(res, content);
     });

@@ -1,0 +1,64 @@
+block append content
+
+    div.container-table
+    
+        div
+            form(method='POST' action='/service/api/web')
+                input(type='text' name='name' required placeholder='Nom')
+                input(type='text' name='description' required placeholder='Description')
+                if user && user.administrator
+                    input(type='checkbox' name='approved' value="Approuvé automatiquement ?") 
+                div.center
+                    if windows
+                        each w in windows
+                            span.checkbox
+                                label(for='windows.' + w.id).checkbox
+                                    input(id='windows.' + w.id name='windows.' + w.id type="checkbox").checkbox
+                                    | #{w.name}
+                input(type='submit' value='Créer').center
+
+        div
+            div.table
+                span.th
+                span.th Nom
+                span.th Description
+                span.th Versions
+                if user && user.administrator
+                    span.th Actions
+
+                each c in content
+                    form(
+                        method='post' 
+                        action='/service/api/web'
+                        class='tr'
+                    )
+                        input(type='hidden' name='id' value=c.id readonly)
+                        span.td
+                            span.state(class=c.approved ? 'approved' : 'disapproved')
+                        span.td
+                            input(type='text' name='name' value=c.name)
+                        span.td
+                            input(type='text' name='description' value=c.description)
+                        span.td
+                            each w in windows
+                                - var chk = false
+                                    each c_w in c.windows
+                                        if w.id == c_w.id
+                                            #{chk = true}
+                                            span.checkbox
+                                                label(for='windows.' + c_w.id).checkbox
+                                                    input(id='windows.' + c_w.id name='windows.' + c_w.id type="checkbox" checked).checkbox
+                                                    | #{c_w.name}
+                                            break
+                                    if chk == false
+                                        span.checkbox
+                                            label(for='windows.' + w.id).checkbox
+                                                input(id='windows.' + w.id name='windows.' + w.id type="checkbox").checkbox
+                                                | #{w.name}
+                                        
+
+                        
+                        span.td.actions.center
+                            if user && user.administrator
+                                include ../utils/actions
+

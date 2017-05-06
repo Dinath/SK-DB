@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const sequelize = require('../../db/index').sequelize;
-const db = require('../../db/service');
-const db_windows = require('../../db/relations/windows').table;
+const db = require('../../db/index').service;
+const db_windows = require('../../db/index').windows;
 
 const utils__ = require('../../ctrl/utils');
 const crud__ = require('../utils/crud');
@@ -13,13 +12,17 @@ const crud = new crud__(db);
 
 router.get('/', function(req, res) {
 
-    db.table.findAll({
-        raw: true,
+    db.findAll({
         order: [
             ['id', 'DESC']
         ],
-        include: [db_windows]
+        include: [{
+            model: db_windows,
+            as: 'windows'
+        }]
     }).then(function(content) {
+        // console.log(content.windows);
+        // console.log(content[0].get('windows'));
         crud.count(res, content);
     });
 
@@ -29,17 +32,39 @@ router.post('/api/web', function(req, res) {
 
     const url = utils.get_url(req.originalUrl);
 
-    db.setWindows(db_windows.findOne({ where: { id: 1 } })).then(function(windows) {
-        db.windows([windows]).then(function() {
-            crud.update(res, req, url);
-        });
-    });
+    let service = db.build(req.body);
 
-    // if (req.body.id) {
-    //     crud.update(res, req, url);
-    // } else {
-    //     crud.create(res, req, url);
-    // }
+    let windows = [];
+
+    for (let o in req.body) {
+
+        if (o.startsWith('windows')) {
+
+            let id = o.split('.')[1];
+            let checked = req.body[o] == 'on';
+            console.log(checked);
+
+            if (!checked) continue;
+
+            db_windows.findOne({ where: { id: id } }).then(function(w) {
+                windows.push(w);
+            });
+        }
+    }
+
+    service.save().then(function() {
+
+        service.setWindows(windows).then(function() {
+
+            service.save().then(function() {
+
+                res.redirect('/' + url);
+
+            });
+
+        });
+
+    });
 
 });
 

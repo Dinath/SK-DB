@@ -3,7 +3,7 @@ const router = express.Router();
 const utils__ = require('../ctrl/utils');
 const utils = new utils__();
 
-const db_windows = require('../db/relations/windows');
+const db_windows = require('../db/index').windows;
 
 router.use(function(req, res, next) {
 
@@ -14,17 +14,13 @@ router.use(function(req, res, next) {
     //     res.redirect('/');
     // }
 
-    if (res.locals.url === 'service') {
-        db_windows.table.findAll({
-            raw: true,
-            attributes: [
-                'id',
-                'name'
-            ]
-        }).then(function(windows) {
-            res.locals.windows = windows;
-        });
-    }
+    // if (res.locals.url === 'service') {
+    //     db_windows.findAll({
+    //         raw: true
+    //     }).then(function(windows) {
+    //         res.locals.windows = windows;
+    //     });
+    // }
 
     next();
 });

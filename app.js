@@ -25,11 +25,13 @@ const db = require('./db/index');
 const index = require('./routes/index');
 
 const route_service = require('./routes/pages/service');
-// const route_software = require('./routes/pages/software');
-// const route_startup = require('./routes/pages/startup');
-const route_pages = require('./routes/pages');
+const route_software = require('./routes/pages/software');
+const route_startup = require('./routes/pages/startup');
 const route_registry = require('./routes/pages/registry');
+
 const routes_common = require('./routes/utils/common');
+
+const route_pages = require('./routes/pages');
 
 const route_auth = require('./routes/auth');
 const route_contact = require('./routes/contact');
@@ -68,7 +70,7 @@ app.use(session({
 
 const basic = auth.basic({
     file: __dirname + "/ctrl/secure.htpasswd"
-})
+});
 
 /**
  * Routing
@@ -77,9 +79,8 @@ const basic = auth.basic({
 app.use('/', index);
 app.use('/software', route_pages);
 app.use('/startup', route_pages);
-
-app.use('/service', route_service);
-app.use('/registry', route_registry);
+app.use('/service', route_pages);
+app.use('/registry', route_pages);
 
 app.use('/com', routes_common);
 app.use('/auth', route_auth);
