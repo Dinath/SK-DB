@@ -1,25 +1,22 @@
 {
-    "name": "sk-database",
-    "version": "0.0.0",
+    "name": "slowin-killer",
+    "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www"
+        "start": "nodemon  ./bin/www"
     },
     "dependencies": {
-        "body-parser": "1.17.1",
-        "chart.js": "2.5.0",
+        "body-parser": "1.17.2",
         "compression": "1.6.2",
-        "cookie-parser": "1.4.3",
-        "debug": "2.6.6",
-        "express": "4.15.2",
-        "express-session": "1.15.2",
+        "express": "4.15.3",
+        "express-minify": "^0.2.0",
+        "express-session": "1.15.3",
         "helmet": "3.6.0",
         "http-auth": "3.1.3",
-        "morgan": "1.8.1",
-        "mysql": "2.13.0",
+        "mysql": "^2.13.0",
         "nodemailer": "4.0.1",
         "pug": "2.0.0-rc.1",
         "sequelize": "3.30.4",
-        "serve-favicon": "2.4.2"
+        "serve-favicon": "2.4.3"
     }
 }

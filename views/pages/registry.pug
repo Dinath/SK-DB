@@ -4,6 +4,7 @@ block append content
     
         div
             form(method='POST' action='/registry/api/web')
+                input(type='text' name='description' required placeholder='Description')
                 input(type='text' name='reg_path' required placeholder='Chemin de la clé de registre')
                 input(type='text' name='reg_name' required placeholder='Nom de la clé de registre')
                 input(type='text' name='reg_value' required placeholder='Valeur de la clé de registre')
@@ -24,7 +25,6 @@ block append content
                 span.th Nom
                 span.th Valeur
                 span.th Type
-                span.th Versions
                 if user && user.administrator
                     span.th Actions
 
@@ -56,7 +56,7 @@ block append content
 
                         span.td
                             if user && user.contributor
-                                select(name='reg_type' value=c.reg_type)
+                                select(name='reg_type' value=c.reg_type disabled=c.approved!=true)
                                     option DWORD
                                     option QWORD
                                     option REG_BINARY

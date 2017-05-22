@@ -9,7 +9,7 @@ Utils.prototype.is_production = function() {
 };
 
 Utils.prototype.database_password = function() {
-    return Utils.prototype.is_production() ? 'db-prod!' : 'db-dev';
+    return Utils.prototype.is_production() ? 'db-prod' : 'db-dev';
 };
 
 Utils.prototype.get_url = function(param_url) {

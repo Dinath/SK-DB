@@ -50,6 +50,7 @@ function render(res, message, sucess = true) {
 
     res.render('contact', {
         message: message,
+        messageDisplay: true,
         messageType: sucess ? 'success' : 'error'
     });
 

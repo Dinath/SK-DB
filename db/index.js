@@ -5,7 +5,8 @@ const utils = new utils__();
 const db_auth = utils.auth(utils.database_password());
 
 const sequelize = new Sequelize('mysql://' + db_auth.user + ':' + db_auth.pass + '@localhost:3306/skdb', {
-    define: { freezeTableName: true }
+    define: { freezeTableName: true },
+    logging: false
 });
 
 sequelize.authenticate()

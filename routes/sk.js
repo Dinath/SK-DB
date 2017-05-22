@@ -5,7 +5,7 @@ const utils = new utils__();
 
 router.get('/:page', function(req, res) {
 
-    utils.get_db(req.params.page).table.findAll({
+    utils.get_db(req.params.page).findAll({
         raw: true
     }).then(function(tables) {
         res.send(tables);

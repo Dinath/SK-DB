@@ -5,11 +5,6 @@ block content
     h2.subtitle Contactez-nous ! 
     p.explanation Demandez-nous des renseignements
 
-    - var classes = ['message', messageType]
-    div(class=classes)
-
-        p= message
-
     div.container-smaller.center
 
         form(method='POST' action='/email')

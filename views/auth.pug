@@ -12,7 +12,9 @@ block content
                         b administrateur
                     else if user.contributor
                         b contributeur
-
+                
+                div.separator
+                
                 form(action='/auth' method='POST')
                     input(type='hidden' name='disconnect' value='disconnect')
                     input(type='submit' value='Déconnexion')

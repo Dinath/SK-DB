@@ -4,14 +4,16 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
+// const logger = require('morgan');
+// const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const session = require('express-session');
+const minify = require('express-minify');
 const auth = require('http-auth');
 const compression = require('compression');
-
+const Utils = require('./ctrl/utils');
+const utils = new Utils();
 
 /**
  * Databases
@@ -24,10 +26,10 @@ const db = require('./db/index');
 
 const index = require('./routes/index');
 
-const route_service = require('./routes/pages/service');
-const route_software = require('./routes/pages/software');
-const route_startup = require('./routes/pages/startup');
-const route_registry = require('./routes/pages/registry');
+// const route_service = require('./routes/pages/service');
+// const route_software = require('./routes/pages/software');
+// const route_startup = require('./routes/pages/startup');
+// const route_registry = require('./routes/pages/registry');
 
 const routes_common = require('./routes/utils/common');
 
@@ -38,12 +40,21 @@ const route_contact = require('./routes/contact');
 const route_sk = require('./routes/sk');
 const route_email = require('./routes/email');
 
+const fail2ban = require('express-fail2ban');
+const fail2banConfig = require('express-fail2ban/config');
+
+new fail2banConfig().init();
 
 /**
  * Express
  */
 var app = express();
 app.use(compression());
+app.use(fail2ban({
+    // log_access: true,
+    // debug: true
+}));
+
 
 // PUG : view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,20 +63,20 @@ app.set('view engine', 'pug');
 /**
  * Configuration
  */
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 // app.use(bodyParser);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+// app.use(cookieParser());
+app.use(minify({ cache: __dirname + '/cache' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(session({
-    secret: 'secret',
+    secret: '4f5ef4r52rf1re5f24r1efsf',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: utils.is_production() }
 }));
 
 const basic = auth.basic({
@@ -108,6 +119,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 
 
 module.exports = app;
